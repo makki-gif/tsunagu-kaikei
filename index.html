@@ -508,7 +508,11 @@
       </select>
     </div>
     <div class="entry-list" id="entry-list"></div>
-    <div class="pager" id="pager"></div>
+    <div class="pager" id="pager">
+      <button id="pager-prev" onclick="prevPage()">◀ 前</button>
+      <span id="pager-info"></span>
+      <button id="pager-next" onclick="nextPage()">次 ▶</button>
+    </div>
   </div>
 </div>
 
@@ -710,7 +714,11 @@ const INITIAL_DATA = [{"id": 1, "date": "2024-11-24", "type": "income", "amount"
     const type  = document.getElementById('filter-type').value;
     let filtered = entries.filter(e => {
       if (month && !e.date.startsWith(month)) return false;
-      if (type && e.type !== type) return false;
+      if (type === 'mipay') {
+        if (!e.mipay) return false;
+      } else if (type && e.type !== type) {
+        return false;
+      }
       return true;
     }).sort((a,b) => b.date.localeCompare(a.date) || b.id - a.id);
 
@@ -767,6 +775,7 @@ const INITIAL_DATA = [{"id": 1, "date": "2024-11-24", "type": "income", "amount"
   window.prevPage = function() { if (currentPage > 1) { currentPage--; renderList(); } };
   window.nextPage = function() { currentPage++; renderList(); };
   window.applyFilter = function() { currentPage = 1; renderList(); };
+  window.goPage = function(page) { currentPage = page; renderList(); };
 
   // ===== トースト =====
   function showToast(msg) {
