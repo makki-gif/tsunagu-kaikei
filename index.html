@@ -470,8 +470,8 @@
 <div class="tab-content" id="tab-input">
   <div class="form-inner">
     <div class="type-toggle">
-      <button class="type-btn active-expense" id="btn-expense" onclick="setType('expense')">− 支出</button>
-      <button class="type-btn" id="btn-income" onclick="setType('income')">＋ 収入</button>
+      <button class="type-btn" id="btn-expense" onclick="setType('expense')">− 支出</button>
+      <button class="type-btn active-income" id="btn-income" onclick="setType('income')">＋ 収入</button>
     </div>
     <div class="form-row">
       <div class="field"><label>日 付</label><input type="date" id="f-date"></div>
@@ -608,7 +608,7 @@ const INITIAL_DATA = [{"id": 1, "date": "2024-11-24", "type": "income", "amount"
   let currentPage = 1;
   let deleteTargetId = null;
   let editType = 'expense';
-  let currentType = 'expense';
+  let currentType = 'income';
   let entries = [];
   let nextId = 1;
   let isListeningFirebase = false;
@@ -703,6 +703,7 @@ const INITIAL_DATA = [{"id": 1, "date": "2024-11-24", "type": "income", "amount"
     document.getElementById('f-mipay').checked = false;
     save();
     showToast('✅ 登録しました');
+    showTab('list');
   }
   window.addEntry = addEntry;
 
