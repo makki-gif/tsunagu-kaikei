@@ -577,12 +577,12 @@
 
   // ===== 認証チェック =====
   function checkAuth() {
-    return sessionStorage.getItem('tsunagu-auth') === '1';
+    return localStorage.getItem('tsunagu-auth') === '1';
   }
 
   function login(pw) {
     if (pw === PASSWORD) {
-      sessionStorage.setItem('tsunagu-auth', '1');
+      localStorage.setItem('tsunagu-auth', '1');
       return true;
     }
     return false;
