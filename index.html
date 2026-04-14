@@ -304,16 +304,16 @@
     margin-left: 3px;
   }
 
-  .entry-right { text-align: right; flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; justify-content: space-between; }
+  .entry-right { text-align: right; flex-shrink: 0; display: flex; flex-direction: column; align-items: flex-end; gap: 3px; }
   .entry-amount { font-size: 14px; font-weight: 700; }
   .entry-amount.income { color: var(--green); }
   .entry-amount.expense { color: var(--red); }
-  .entry-balance { font-size: 10px; color: var(--muted); margin-top: 1px; }
+  .entry-balance { font-size: 10px; color: var(--muted); }
 
   .entry-actions {
     display: flex;
-    gap: 4px;
-    margin-top: 5px;
+    gap: 3px;
+    margin-top: 2px;
   }
   .btn-small {
     font-size: 10px;
@@ -757,14 +757,14 @@ const INITIAL_DATA = [{"id": 1, "date": "2024-11-24", "type": "income", "amount"
           <div class="entry-date">${e.date}</div>
           <div class="entry-summary">${e.summary}${e.mipay ? '<span class="mipay-badge">未払</span>' : ''}</div>
           ${e.note ? `<div class="entry-note">${e.note}</div>` : ''}
-          <div class="entry-actions">
-            <button class="btn-small" onclick="openEdit(${e.id})">編集</button>
-            <button class="btn-small btn-delete" onclick="confirmDelete(${e.id}, '${e.summary.replace(/'/g,"\\'")}')">削除</button>
-          </div>
         </div>
         <div class="entry-right">
           <div class="entry-amount ${e.type}">${e.type === 'income' ? '+' : '-'}¥${e.amount.toLocaleString()}</div>
           <div class="entry-balance">残¥${(balMap[e.id]||0).toLocaleString()}</div>
+          <div class="entry-actions">
+            <button class="btn-small" onclick="openEdit(${e.id})">編集</button>
+            <button class="btn-small btn-delete" onclick="confirmDelete(${e.id}, '${e.summary.replace(/'/g,"\\'")}')">削除</button>
+          </div>
         </div>
       </div>`).join('');
 
