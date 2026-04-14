@@ -697,7 +697,9 @@ const INITIAL_DATA = [{"id": 1, "date": "2024-11-24", "type": "income", "amount"
     const note    = document.getElementById('f-note').value.trim();
     if (!date || !amount || !summary) { showToast('⚠️ 日付・金額・摘要は必須です'); return; }
     entries.push({ id: nextId++, date, type: currentType, amount, summary, mipay, note });
-    document.getElementById('f-date').value = '';
+    const dateEl = document.getElementById('f-date');
+    dateEl.value = '';
+    dateEl.valueAsDate = null;
     document.getElementById('f-amount').value = '';
     document.getElementById('f-summary').value = '';
     document.getElementById('f-note').value = '';
