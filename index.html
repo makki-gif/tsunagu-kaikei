@@ -553,6 +553,7 @@
 
 <!-- Firebase SDK (compat) -->
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-database-compat.js"></script>
 <!-- Firebase SDK -->
 <script>
@@ -570,6 +571,7 @@
   };
 
   const app = firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
   const db = firebase.database();
 
   // ===== パスワード =====
@@ -878,12 +880,16 @@ const INITIAL_DATA = [{"id": 1, "date": "2024-11-24", "type": "income", "amount"
   });
 
   // ===== 起動 =====
-  if (checkAuth()) {
-    hideLoginScreen();
-    initApp();
-  } else {
-    showLoginScreen();
-  }
+  auth.signInAnonymously().then(function() {
+    if (checkAuth()) {
+      hideLoginScreen();
+      initApp();
+    } else {
+      showLoginScreen();
+    }
+  }).catch(function(err) {
+    console.error('匿名認証エラー:', err);
+  });
 
 </script>
 </body>
